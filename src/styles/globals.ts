@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { Colors } from '../theme';
 
 export default createGlobalStyle`
 	* {
@@ -21,5 +20,9 @@ export default createGlobalStyle`
 
 	body, input, button {
 		font: 14px Roboto, sans-serif;
-	}
+  }
+  
+  .margin-auto {
+    margin: 0 auto;
+  }
 `;

@@ -35,6 +35,7 @@ const Metrics = {
   borderRadius: 8,
   headerHeight: 100,
   sidebarWidth: 200,
+  headerSize: 48,
   xs: 0,
   sm: 600,
   md: 960,
