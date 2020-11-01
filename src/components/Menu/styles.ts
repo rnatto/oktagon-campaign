@@ -7,10 +7,9 @@ export const CustomHeader = styled(Paper)`
     border-radius: 0px !important;
     margin: 0px;
     display: flex;
-    /* justify-content: space-evenly; */
     img {
         object-fit: contain;
-        margin: ${Metrics.margin}px; 
+        margin: ${Metrics.margin}px auto; 
     }
 `;
 export const ContainerMenu = styled(Paper)`
@@ -20,22 +19,22 @@ export const ContainerMenu = styled(Paper)`
     transform: translateX(0px);
     transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     height: calc(100vh - 48px);
-    @media only screen and (max-width: ${Metrics.sm}px) {
+    @media only screen and (max-width: ${Metrics.md}px) {
         position: absolute;
+        z-index: 10;
         transform: ${({ open }: Props) =>
         open ? 'translateX(0px)' : 'translateX(-250px)'};
     }
 `;
 
-export const Image = styled.div`
-    margin-top: ${Metrics.margin * 4}px;
-    margin-bottom: ${Metrics.margin * 4}px;
+export const Image = styled(Paper)`
+    margin: ${Metrics.margin * 4}px ${Metrics.margin * 2}px;
     display: flex;
     align-items: center;
     justify-content: center;
     img {
-        border: 5px solid ${Colors.contrast};
-        border-radius: 8px;
+        margin: ${Metrics.margin * 1}px;
+        border-radius: 5px;
         max-height: 210px;
         max-width: 210px
         
@@ -51,5 +50,5 @@ export const AppContainer = styled(Box)`
 
 export const ContainerChildren = styled(Box)`
     margin: ${Metrics.margin * 4}px;
-    min-height: calc(100vh - ${Metrics.margin})px;
+    width: 100%;
 `;

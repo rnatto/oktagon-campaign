@@ -10,10 +10,10 @@ import { Metrics } from '../../theme';
 
 const Menu: React.FC = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false);
-    const matches = useMediaQuery(`(max-width:${Metrics.sm}px)`);
+    const matches = useMediaQuery(`(max-width:${Metrics.md}px)`);
 
-    const resetMenu = ()=> setShowMenu(false);
-    
+    const resetMenu = () => setShowMenu(false);
+
     useEffect(() => {
         resetMenu();
     }, [matches]);
@@ -21,15 +21,15 @@ const Menu: React.FC = ({ children }) => {
     return (
         <>
             <CustomHeader elevation={1}>
+                <img src={Logo} alt="Logo Avengers" />
                 {matches && <IconButton color="secondary" aria-label="menu" onClick={() => setShowMenu(!showMenu)}>
                     <IconMenu />
                 </IconButton>}
-                <img src={Logo} alt="Logo Avengers" />
             </CustomHeader>
             <AppContainer>
                 <ContainerMenu elevation={2} open={showMenu}>
                     <MenuList>
-                        <Image>
+                        <Image elevation={2}>
                             <img src={Thanos} alt="Thanos Image Profile" className="margin-auto" />
                         </Image>
                         <MenuItem component={Link} to="/" onClick={resetMenu}>

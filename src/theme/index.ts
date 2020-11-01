@@ -73,11 +73,9 @@ export const theme = createMuiTheme({
   },
   typography: {
     allVariants: {
-      fontFamily: 'IBM Plex Sans, sans-serif',
     },
     h1: {
       fontWeight: 'bold',
-      fontFamily: 'Barlow, sans-serif',
       fontSize: 'calc(33px + (53 - 33) * ((100vw - 320px) / (1366 - 320)))',
       lineHeight: 'calc(40px + (64 - 40) * ((100vw - 320px) / (1366 - 320)))',
       [breakpoints.up(1366)]: {
@@ -93,14 +91,12 @@ export const theme = createMuiTheme({
         fontSize: '53px',
         lineHeight: '64px',
       },
-      fontFamily: 'Barlow, sans-serif',
       letterSpacing: '-1.18px',
       fontWeight: 'bolder',
     },
     h4: {
       fontSize: 31,
       lineHeight: '37px',
-      fontFamily: 'Barlow, sans-serif',
       letterSpacing: '-.78px',
       fontWeight: 'bold',
     },
@@ -111,11 +107,9 @@ export const theme = createMuiTheme({
       fontWeight: 'bold',
     },
     subtitle1: {
-      fontFamily: 'Barlow, sans-serif',
     },
     caption: {
       fontStyle: 'italic',
-      fontFamily: 'IBM Plex Sans, sans-serif',
       fontSize: '13px',
       lineHeight: '17px',
     },
@@ -123,7 +117,6 @@ export const theme = createMuiTheme({
       fontSize: '13px',
       lineHeight: '16px',
       fontWeight: 'bold',
-      fontFamily: 'Barlow, sans-serif',
     },
   },
   overrides: {
@@ -166,14 +159,12 @@ export const theme = createMuiTheme({
         fontSize: '13px',
         lineHeight: '16px',
         fontWeight: 'bold',
-        fontFamily: 'Barlow, sans-serif',
         padding: '15px 44px',
       },
       sizeSmall: {
         fontSize: '13px',
         lineHeight: '16px',
         fontWeight: 'bold',
-        fontFamily: 'Barlow, sans-serif',
         padding: '15px 30px',
       },
       outlinedPrimary: {
