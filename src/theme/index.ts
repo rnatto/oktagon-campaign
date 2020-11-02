@@ -167,20 +167,6 @@ export const theme = createMuiTheme({
         fontWeight: 'bold',
         padding: '15px 30px',
       },
-      outlinedPrimary: {
-        color: 'white',
-        border: `2px solid ${Colors.primary}`,
-        '&:hover': {
-          border: `2px solid ${Colors.success}`,
-        },
-      },
-      outlinedSecondary: {
-        color: 'white',
-        border: `2px solid ${Colors.secondary}`,
-        '&:hover': {
-          border: `2px solid ${Colors.lightSuccess}`,
-        },
-      },
     },
     MuiAppBar: {
       colorDefault: {

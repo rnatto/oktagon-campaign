@@ -1,4 +1,4 @@
-import { Box, Button, Card, CircularProgress, ListItem, Table, TableBody, TableCell, TableHead, TableRow, Typography, useMediaQuery } from '@material-ui/core';
+import { Box, Button, Card, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Typography, useMediaQuery } from '@material-ui/core';
 import dayjs from 'dayjs';
 import React from 'react';
 import { Campaign } from '../../../../utils/interfaces/campaign';

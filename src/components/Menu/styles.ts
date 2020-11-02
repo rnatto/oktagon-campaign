@@ -18,10 +18,13 @@ export const ContainerMenu = styled(Paper)`
     border-radius: 0px !important;
     transform: translateX(0px);
     transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    height: calc(100vh - 48px);
+        height: auto;
     @media only screen and (max-width: ${Metrics.md}px) {
-        position: absolute;
+        padding-top: 48px;
+        height: 100vh;
+        position: fixed;
         z-index: 10;
+        top: 0;
         transform: ${({ open }: Props) =>
         open ? 'translateX(0px)' : 'translateX(-250px)'};
     }
