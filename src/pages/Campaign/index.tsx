@@ -8,6 +8,7 @@ import ListCampaign from './components/ListCampaign';
 import dayjs from 'dayjs';
 import { campaignService } from '../../services';
 import { Campaign as CampaignInterface } from '../../utils/interfaces/campaign';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -86,7 +87,7 @@ const Campaign: React.FC = () => {
             />
           </Box>
           <Box display={matches ? "none" : "flex"} alignItems="center">
-            <Button color="secondary" variant="contained" size="small">
+            <Button color="secondary" variant="contained" size="small" component={Link} to="/campaign/new">
               New Campaign
           </Button>
           </Box>
@@ -101,12 +102,13 @@ const Campaign: React.FC = () => {
           </TabList>
           :
           <Box position="fixed" bottom={Metrics.margin * 2} right={Metrics.margin * 2}>
-            <Fab size="medium" color="secondary" aria-label="add" classes={{ root: classes.fab }}>
+            <Fab size="medium" color="secondary" aria-label="add" classes={{ root: classes.fab }}
+              component={Link} to="/campaign/new">
               <Add />
             </Fab>
           </Box>}
         <TabPanel value={value}>
-          <ListCampaign handleRetry={handleCampaignsRequest} campaigns={matches ? campaigns : filteredCampaigns } loading={loading} error={error} />
+          <ListCampaign handleRetry={handleCampaignsRequest} campaigns={matches ? campaigns : filteredCampaigns} loading={loading} error={error} />
         </TabPanel>
       </TabContext>
 
