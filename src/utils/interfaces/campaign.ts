@@ -1,12 +1,12 @@
 export interface Campaign {
-    _id: string,
-    updatedAt: string,
-    createdAt: string,
-    imgUrl: string,
+    _id?: string,
+    updatedAt?: string,
+    createdAt?: string,
+    imgUrl?: string,
     title: string,
     description: string,
     dateEnd: string,
     dateBegin: string,
-    actions: [],
+    actions?: [],
     status?: string
 }
