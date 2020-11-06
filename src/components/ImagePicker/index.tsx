@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Add } from '@material-ui/icons';
 import { Container } from './styles';
@@ -8,7 +7,6 @@ interface Props {
 }
 const ImagePicker: React.FC<Props> = ({ image, setImage }) => {
     const [selectedImage, setSelectedImage] = useState('');
-    const [selectedFile, setSelectedFile] = useState<File>({} as File);
     const [imgError, setImgError] = useState(false);
     const handleUpload = () => {
         document.getElementById('upload')?.click();

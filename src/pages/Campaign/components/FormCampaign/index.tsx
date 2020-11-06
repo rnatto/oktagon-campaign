@@ -6,7 +6,6 @@ import ImagePicker from '../../../../components/ImagePicker';
 import DayjsUtils from '@date-io/dayjs';
 import dayjs from 'dayjs';
 import { Field, Form, Formik } from 'formik';
-import { Campaign } from '../../../../utils/interfaces/campaign';
 import { campaignService } from '../../../../services';
 import { getBase64 } from '../../../../utils/utils';
 import * as yup from 'yup';
@@ -20,7 +19,6 @@ const FormCampaign: React.FC = () => {
     dateEnd: '',
   };
   const history = useHistory();
-  const [campaign, setCampaign] = useState<Campaign>(initialValues);
   const validationSchema = yup.object().shape({
     title: yup
       .string()
@@ -48,7 +46,6 @@ const FormCampaign: React.FC = () => {
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
-            console.log(values);
             const dateBegin = dayjs(values.dateBegin).toISOString();
             const dateEnd = dayjs(values.dateEnd).toISOString();
             getBase64(image, async (result) => {
@@ -61,10 +58,6 @@ const FormCampaign: React.FC = () => {
               } finally {
                 setSubmitting(false);
               }
-            });
-            setCampaign({
-
-              ...values,
             });
           }}
         >

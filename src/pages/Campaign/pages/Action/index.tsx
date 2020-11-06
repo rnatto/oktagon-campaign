@@ -30,7 +30,6 @@ const Action: React.FC = () => {
   });
   const history = useHistory();
   const [campaign, setCampaign] = useState<Campaign>(initialValues);
-  const [action, setAction] = useState<Campaign>(initialValues);
   return (
     <Box maxWidth={600}>
       <Box px={1} py={2}>
@@ -55,7 +54,7 @@ const Action: React.FC = () => {
           setSubmitting(false);
         }}
       >
-        {({ submitForm, isSubmitting, setFieldValue, values, errors, touched }) => (
+        {({ submitForm, isSubmitting, errors, touched }) => (
           <Form>
             <Box px={1} py={2}>
               <Typography variant="body1">

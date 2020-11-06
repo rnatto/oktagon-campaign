@@ -2,12 +2,10 @@ import { Box, Button, Card, CircularProgress, IconButton, Modal, Paper, Table, T
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { Campaign } from '../../../../utils/interfaces/campaign';
-import { Delete, Edit, ReplayOutlined } from '@material-ui/icons';
+import { Delete, FilterNone, ReplayOutlined } from '@material-ui/icons';
 import isBetween from 'dayjs/plugin/isBetween';
 import { Metrics } from '../../../../theme';
 import { useHistory } from 'react-router-dom';
-import { campaignService } from '../../../../services';
-
 dayjs.extend(isBetween);
 
 interface Props {
@@ -17,7 +15,13 @@ interface Props {
   error: boolean,
   handleRetry: Function,
 }
-const ListCampaign: React.FC<Props> = ({ campaigns, loading = false, error = false, handleRetry, removeCampaign }) => {
+const ListCampaign: React.FC<Props> = ({
+  campaigns,
+  loading = false,
+  error = false,
+  handleRetry,
+  removeCampaign
+}) => {
   const tableHeader = [
     'Campaign',
     'Start Date',
@@ -122,14 +126,12 @@ const ListCampaign: React.FC<Props> = ({ campaigns, loading = false, error = fal
                     {campaign.status}
                   </TableCell>
                   <TableCell align="right">
-                    <Box display="flex">
-                      <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => handleEdit(campaign)}>
-                        <Edit color="disabled" />
-                      </IconButton>
-                      <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => { setOpen(true); setSelectedCampaign(campaign) }}>
-                        <Delete color="disabled" />
-                      </IconButton>
-                    </Box>
+                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => handleEdit(campaign)}>
+                      <FilterNone color="disabled" />
+                    </IconButton>
+                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => { setOpen(true); setSelectedCampaign(campaign) }}>
+                      <Delete color="disabled" />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               </TableBody>

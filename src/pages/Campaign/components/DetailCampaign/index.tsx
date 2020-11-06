@@ -6,7 +6,7 @@ import { Campaign } from '../../../../utils/interfaces/campaign';
 import { campaignService } from '../../../../services';
 import dayjs from 'dayjs';
 
-const EditCampaign: React.FC = () => {
+const DetailCampaign: React.FC = () => {
   const history = useHistory();
   const [campaign, setCampaign] = useState<Campaign>();
   let { id } = useParams<{ id: string }>();
@@ -103,4 +103,4 @@ const EditCampaign: React.FC = () => {
   )
 }
 
-export default EditCampaign;
+export default DetailCampaign;
