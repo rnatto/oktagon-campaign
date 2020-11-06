@@ -21,10 +21,7 @@ const EditCampaign: React.FC = () => {
       setCampaign(returnCampaign);
     } catch (error) {
       console.log(error);
-    } finally {
-
     }
-
   }, []);
 
   const handleAddAction = () => {
@@ -88,7 +85,7 @@ const EditCampaign: React.FC = () => {
       <Box display="flex" flexWrap="wrap">
         <Box m={1}>
           <Button variant="outlined" color="secondary" size="large" component={Link} to="/dashboard">
-            Cancel
+            Go Back
           </Button>
         </Box>
         <Box m={1}>

@@ -9,6 +9,7 @@ import { Field, Form, Formik } from 'formik';
 import { Campaign } from '../../../../utils/interfaces/campaign';
 import { campaignService } from '../../../../services';
 import { getBase64 } from '../../../../utils/utils';
+import * as yup from 'yup';
 
 const FormCampaign: React.FC = () => {
   const [image, setImage] = useState('');
@@ -20,6 +21,20 @@ const FormCampaign: React.FC = () => {
   };
   const history = useHistory();
   const [campaign, setCampaign] = useState<Campaign>(initialValues);
+  const validationSchema = yup.object().shape({
+    title: yup
+      .string()
+      .required('Title is required'),
+    description: yup
+      .string()
+      .required('Description is required'),
+    dateBegin: yup
+      .string()
+      .required('Date Begin is required'),
+    dateEnd: yup
+      .string()
+      .required('Date End is required'),
+  });
   return (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
       <Box maxWidth={600}>
@@ -30,6 +45,7 @@ const FormCampaign: React.FC = () => {
         </Box>
         <Formik
           initialValues={initialValues}
+          validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             console.log(values);
@@ -44,7 +60,6 @@ const FormCampaign: React.FC = () => {
                 console.log(error);
               } finally {
                 setSubmitting(false);
-
               }
             });
             setCampaign({
@@ -128,7 +143,9 @@ const FormCampaign: React.FC = () => {
               </Box>
               <Box display="flex" flexWrap="wrap">
                 <Box m={1}>
-                  <Button variant="outlined" color="secondary" size="large">Cancel</Button>
+                  <Button variant="outlined" color="secondary" size="large" onClick={() => history.goBack()}>
+                    Cancel
+                  </Button>
                 </Box>
                 <Box m={1}>
                   <Button

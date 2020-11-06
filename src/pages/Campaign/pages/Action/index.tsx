@@ -5,8 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { campaignService } from '../../../../services';
 import { Action as ActionInterface } from '../../../../utils/interfaces/action';
 import { Campaign } from '../../../../utils/interfaces/campaign';
-
-// import { Container } from './styles';
+import * as yup from 'yup';
 
 const Action: React.FC = () => {
   const initialValues = {
@@ -15,6 +14,20 @@ const Action: React.FC = () => {
     dateBegin: '',
     dateEnd: '',
   };
+  const validationSchema = yup.object().shape({
+    title: yup
+      .string()
+      .required('Title is required'),
+    description: yup
+      .string()
+      .required('Description is required'),
+    dateBegin: yup
+      .string()
+      .required('Date Begin is required'),
+    dateEnd: yup
+      .string()
+      .required('Date End is required'),
+  });
   const history = useHistory();
   const [campaign, setCampaign] = useState<Campaign>(initialValues);
   const [action, setAction] = useState<Campaign>(initialValues);
@@ -27,7 +40,7 @@ const Action: React.FC = () => {
       </Box>
       <Formik
         initialValues={initialValues}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
         onSubmit={async (values: ActionInterface, { setSubmitting }) => {
           setSubmitting(true);
           try {
@@ -123,7 +136,9 @@ const Action: React.FC = () => {
             </Box>
             <Box display="flex" flexWrap="wrap">
               <Box m={1}>
-                <Button variant="outlined" color="secondary" size="large">Cancel</Button>
+                <Button variant="outlined" color="secondary" size="large" onClick={() => history.goBack()}>
+                  Cancel
+                </Button>
               </Box>
               <Box m={1}>
                 <Button

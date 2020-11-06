@@ -29,7 +29,6 @@ const Action: React.FC = () => {
       </Box>
       <Formik
         initialValues={initialValues}
-        // validationSchema={validationSchema}
         onSubmit={async (values: Action, { setSubmitting }) => {
           setSubmitting(true);
           try {
@@ -125,7 +124,7 @@ const Action: React.FC = () => {
             </Box>
             <Box display="flex" flexWrap="wrap">
               <Box m={1}>
-                <Button variant="outlined" color="secondary" size="large" component={Link} to="/dashboard">
+                <Button variant="outlined" color="secondary" size="large" onClick={() => history.goBack()}>
                   Cancel
                 </Button>
               </Box>
