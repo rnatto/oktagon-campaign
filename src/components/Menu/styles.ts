@@ -1,4 +1,4 @@
-import { Box, MenuItem, Paper } from '@material-ui/core';
+import { Box, Grid, MenuItem, Paper } from '@material-ui/core';
 import styled from 'styled-components';
 import { Colors, Metrics } from '../../theme';
 
@@ -12,13 +12,14 @@ export const CustomHeader = styled(Paper)`
         margin: ${Metrics.margin}px auto; 
     }
 `;
-export const ContainerMenu = styled(Paper)`
+export const ContainerMenu = styled(Grid)`
     background: ${Colors.primary} !important;
     width: 250px;
     border-radius: 0px !important;
     transform: translateX(0px);
     transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        height: auto;
+    min-height: calc(100vh - 48px);
+    height: 100%;
     @media only screen and (max-width: ${Metrics.md}px) {
         padding-top: 48px;
         height: 100vh;
@@ -35,6 +36,8 @@ export const Image = styled(Paper)`
     display: flex;
     align-items: center;
     justify-content: center;
+    max-height: 226px;
+    max-width: 226px;
     img {
         margin: ${Metrics.margin * 1}px;
         border-radius: 5px;
@@ -51,7 +54,7 @@ export const AppContainer = styled(Box)`
     display: flex;
 `;
 
-export const ContainerChildren = styled(Box)`
+export const ContainerChildren = styled(Grid)`
     margin: ${Metrics.margin * 4}px;
     width: 100%;
 `;

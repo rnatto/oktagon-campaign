@@ -1,18 +1,16 @@
-import { Box, Button, TextField, Typography } from '@material-ui/core';
-import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { Box, Button, Typography } from '@material-ui/core';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { useHistory } from 'react-router-dom';
-import React, { constructor, useState } from 'react';
+import React, { useState } from 'react';
 import ImagePicker from '../../../../components/ImagePicker';
 import DayjsUtils from '@date-io/dayjs';
 import dayjs from 'dayjs';
-import * as Yup from "yup";
 import { Field, Form, Formik } from 'formik';
 import { Campaign } from '../../../../utils/interfaces/campaign';
 import { campaignService } from '../../../../services';
+import { getBase64 } from '../../../../utils/utils';
 
 const FormCampaign: React.FC = () => {
-  const [startDate, handlestartDateChange] = useState(dayjs());
-  const [endDate, handleEndDateChange] = useState(dayjs().add(1, 'day'));
   const [image, setImage] = useState('');
   const initialValues = {
     title: '',
@@ -22,15 +20,6 @@ const FormCampaign: React.FC = () => {
   };
   const history = useHistory();
   const [campaign, setCampaign] = useState<Campaign>(initialValues);
-  // const validationSchema = Yup.object({
-  //   title: Yup.string("Enter a valid title")
-  //   .required("Title is required"),
-  // imgUrl: Yup.string("Enter a valid image"),
-  // description: Yup.string("Enter a valid description")
-  //   .required("Description is required"),
-  // dateBegin: Yup.string().required('Begin date is required'),
-  // dateEnd: Yup.string().required("Begin date is required"),
-  // });
   return (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
       <Box maxWidth={600}>
@@ -41,27 +30,27 @@ const FormCampaign: React.FC = () => {
         </Box>
         <Formik
           initialValues={initialValues}
-          // validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             console.log(values);
             const dateBegin = dayjs(values.dateBegin).toISOString();
             const dateEnd = dayjs(values.dateEnd).toISOString();
-            setCampaign({
-              ...values,
-              // dateBegin,
-              // dateEnd
-            });
-            const img = 'https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/1/1c/The_Amazing_Spider-Man_Iron_Spider_Infinity_War.png/revision/latest?cb=20180404183507';
-            try {
-              await campaignService.create({ ...values, dateBegin, dateEnd, imgUrl: img });
-              history.push('/campaign');
-            } catch (error) {
-              console.log(error);
-            } finally {
+            getBase64(image, async (result) => {
+              const imgUrl = result;
+              try {
+                await campaignService.create({ ...values, dateBegin, dateEnd, imgUrl });
+                history.push('/campaign');
+              } catch (error) {
+                console.log(error);
+              } finally {
+                setSubmitting(false);
 
-            }
-            setSubmitting(false);
+              }
+            });
+            setCampaign({
+
+              ...values,
+            });
           }}
         >
           {({ submitForm, isSubmitting, setFieldValue, values, errors, touched }) => (
@@ -74,19 +63,17 @@ const FormCampaign: React.FC = () => {
                   Don't see the hero you want to use? Add a new hero
                 </Typography>
               </Box>
-              <ImagePicker image="image" setImage={setImage}/>
+              <ImagePicker image="image" setImage={setImage} />
               <Box px={1} py={2}>
                 <Typography variant="body1">
                   What is the title of the campaign?
                 </Typography>
                 <Field
-                  // component={TextField}
                   name="title"
                   variant="outlined"
                   type="text"
                   color="secondary"
                   size="small"
-                // fullWidth
                 />
                 {errors.title && touched.title ? (
                   <div>{errors.title}</div>
@@ -98,13 +85,11 @@ const FormCampaign: React.FC = () => {
                   Write a brief description of the campaign
                 </Typography>
                 <Field
-                  // component={TextField}
                   name="description"
                   variant="outlined"
                   color="secondary"
                   type="text"
                   size="small"
-                // fullWidth
                 />
                 {errors.description && touched.description ? (
                   <div>{errors.description}</div>
@@ -117,15 +102,10 @@ const FormCampaign: React.FC = () => {
                 <Box display="flex" flexWrap="wrap">
                   <Box m={1}>
                     <Field
-                      // component={DateTimePicker}
                       label="Start"
                       type="date"
                       name="dateBegin"
                       color="secondary"
-                      // inputVariant="outlined"
-                      // value={startDate}
-                      // onChange={(e) => e && handlestartDateChange(e)}
-                      // disablePast
                       size="small"
                     />
                     {errors.dateBegin && touched.dateBegin ? (
@@ -134,16 +114,10 @@ const FormCampaign: React.FC = () => {
                   </Box>
                   <Box m={1}>
                     <Field
-                      // component={DateTimePicker}
                       label="End"
                       type="date"
                       color="secondary"
                       name="dateEnd"
-                      // inputVariant="outlined"
-                      // value={endDate}
-                      // disablePast
-                      // minDate={dayjs(startDate)}
-                      // onChange={(e) => e && handleEndDateChange(e)}
                       size="small"
                     />
                     {errors.dateEnd && touched.dateEnd ? (

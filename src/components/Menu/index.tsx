@@ -1,4 +1,4 @@
-import { Box, MenuItem, MenuList, Typography, Button, IconButton } from '@material-ui/core';
+import { Box, MenuItem, MenuList, Typography, Button, IconButton, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Thanos from '../../assets/images/thanos.jpeg';
@@ -27,26 +27,29 @@ const Menu: React.FC = ({ children }) => {
                 </IconButton>}
             </CustomHeader>
             <AppContainer>
-                <ContainerMenu elevation={2} open={showMenu}>
-                    <MenuList>
+                <Grid container >
+                    <ContainerMenu item open={showMenu} xs={3}>
                         <Image elevation={2}>
                             <img src={Thanos} alt="Thanos Image Profile" className="margin-auto" />
                         </Image>
                         <MenuItem component={Link} to="/" onClick={resetMenu}>
                             <Typography color="textSecondary">
                                 Dashboard
-                    </Typography>
+                            </Typography>
                         </MenuItem>
                         <MenuItem component={Link} to="/campaign" onClick={resetMenu}>
-                            <Typography color="textSecondary">
-                                Campaign
-                </Typography>
+                        <Typography color="textSecondary">
+                            Campaign
+                        </Typography>
                         </MenuItem>
-                    </MenuList>
-                </ContainerMenu>
-                <ContainerChildren>
-                    {children}
-                </ContainerChildren>
+                    </ContainerMenu>
+
+                    <ContainerChildren item xs={9}>
+                        <Box m={4} mt={6}>
+                        {children}
+                        </Box>
+                    </ContainerChildren>
+                </Grid>
             </AppContainer>
         </>
 

@@ -1,10 +1,12 @@
 import { Box, Typography, Button } from '@material-ui/core';
+import dayjs from 'dayjs';
 import { Formik, Form, Field } from 'formik';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { campaignService } from '../../../../services';
-import { Action as ActionInterface } from '../../../../utils/interfaces/action';
-import { Campaign } from '../../../../utils/interfaces/campaign';
+import { useHistory, Link } from 'react-router-dom';
+import ImagePicker from '../../components/ImagePicker';
+import { campaignService } from '../../services';
+import { Action } from '../../utils/interfaces/action';
+import { Campaign } from '../../utils/interfaces/campaign';
 
 // import { Container } from './styles';
 
@@ -28,7 +30,7 @@ const Action: React.FC = () => {
       <Formik
         initialValues={initialValues}
         // validationSchema={validationSchema}
-        onSubmit={async (values: ActionInterface, { setSubmitting }) => {
+        onSubmit={async (values: Action, { setSubmitting }) => {
           setSubmitting(true);
           try {
             const actions = campaign?.actions?.length ? [...campaign.actions, values] : [values];
@@ -123,7 +125,9 @@ const Action: React.FC = () => {
             </Box>
             <Box display="flex" flexWrap="wrap">
               <Box m={1}>
-                <Button variant="outlined" color="secondary" size="large">Cancel</Button>
+                <Button variant="outlined" color="secondary" size="large" component={Link} to="/dashboard">
+                  Cancel
+                </Button>
               </Box>
               <Box m={1}>
                 <Button
@@ -133,7 +137,7 @@ const Action: React.FC = () => {
                   disabled={isSubmitting}
                   onClick={submitForm}>
                   Create campaign
-                      </Button>
+                </Button>
               </Box>
             </Box>
           </Form>

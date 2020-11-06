@@ -25,4 +25,14 @@ export default createGlobalStyle`
   .margin-auto {
     margin: 0 auto;
   }
+
+  .pointer {
+	cursor: pointer;
+	&:hover {
+		opacity: 0.8;
+	}
+  }
+  .height-100 {
+	  flex: 1;
+  }
 `;
