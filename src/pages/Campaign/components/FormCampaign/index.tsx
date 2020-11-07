@@ -51,7 +51,7 @@ const FormCampaign: React.FC = () => {
             getBase64(image, async (result) => {
               const imgUrl = result;
               try {
-                await campaignService.create({ ...values, dateBegin, dateEnd, imgUrl });
+                await campaignService.create({ ...values, dateBegin, dateEnd, imgUrl, actions: [] });
                 history.push('/campaign');
               } catch (error) {
                 console.log(error);

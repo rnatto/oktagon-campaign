@@ -1,4 +1,5 @@
 /* eslint-disable no-dupe-keys */
+import { Action } from '../utils/interfaces/action';
 import { Campaign } from '../utils/interfaces/campaign';
 import api from './api';
 
@@ -11,7 +12,7 @@ const list = () => {
 };
 
 const update = (campaign: Campaign) => {
-  return api.put(`/campaign/${campaign._id}`);
+  return api.put(`/campaign/${campaign._id}`, { actions: campaign.actions });
 };
 
 const create = (campaign: Campaign) => {

@@ -9,6 +9,6 @@ export interface Campaign {
     description: string,
     dateEnd: string,
     dateBegin: string,
-    actions?: Action[],
+    actions: Action[],
     status?: string
 }

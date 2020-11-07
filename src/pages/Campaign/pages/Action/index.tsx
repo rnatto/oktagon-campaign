@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { campaignService } from '../../../../services';
 import { Action as ActionInterface } from '../../../../utils/interfaces/action';
 import { Campaign } from '../../../../utils/interfaces/campaign';
@@ -29,7 +29,20 @@ const Action: React.FC = () => {
       .required('Date End is required'),
   });
   const history = useHistory();
-  const [campaign, setCampaign] = useState<Campaign>(initialValues);
+  let { id } = useParams<{ id: string }>();
+  useEffect(() => {
+    getCampaign();
+
+  }, []);
+  const getCampaign = useCallback(async () => {
+    try {
+      const { data } = await campaignService.getById(id);
+      setCampaign(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }, []);
+  const [campaign, setCampaign] = useState<Campaign>({} as Campaign);
   return (
     <Box maxWidth={600}>
       <Box px={1} py={2}>
@@ -43,9 +56,9 @@ const Action: React.FC = () => {
         onSubmit={async (values: ActionInterface, { setSubmitting }) => {
           setSubmitting(true);
           try {
-            const actions = campaign?.actions?.length ? [...campaign.actions, values] : [values];
-            await campaignService.update({ ...campaign, actions });
-            history.push('/campaign');
+            const actions =
+              await campaignService.update({ ...campaign, actions: [...campaign.actions, values] });
+            history.goBack();
           } catch (error) {
             console.log(error);
           } finally {
@@ -144,10 +157,10 @@ const Action: React.FC = () => {
                   variant="contained"
                   color="secondary"
                   size="large"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !campaign}
                   onClick={submitForm}>
-                  Create campaign
-                      </Button>
+                  Create Action
+                </Button>
               </Box>
             </Box>
           </Form>
