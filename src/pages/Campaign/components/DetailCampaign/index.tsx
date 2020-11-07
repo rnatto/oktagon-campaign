@@ -63,8 +63,10 @@ const DetailCampaign: React.FC = () => {
           <Typography variant="body1" component="h3">
             <b>Actions:</b>
           </Typography>
-          {campaign?.actions?.length ? campaign?.actions?.map(action =>
-            <Typography variant="body1" component="h3"> {action.title}</Typography>
+          {campaign?.actions?.length ? campaign?.actions?.map((action) =>
+            <Link to={{ pathname: `/action/${id}`, state: { action } }} >
+              <Typography variant="body1" component="h3"> {action.title}</Typography>
+            </Link>
           ) : <Typography variant="body1" component="h3">No actions added yet</Typography>}
         </Box>
         <Box mx={4} fontStyle="italic" className="pointer" fontWeight="bolder" style={{ textDecoration: 'underline' }}
@@ -84,7 +86,7 @@ const DetailCampaign: React.FC = () => {
       </Box>
       <Box display="flex" flexWrap="wrap">
         <Box m={1}>
-          <Button variant="outlined" color="secondary" size="large" component={Link} to="/dashboard">
+        <Button variant="outlined" color="secondary" size="large" onClick={() => history.goBack()}>
             Go Back
           </Button>
         </Box>

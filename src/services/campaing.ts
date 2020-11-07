@@ -12,6 +12,7 @@ const list = () => {
 };
 
 const update = (campaign: Campaign) => {
+  console.log('CAMPAIGN', campaign)
   return api.put(`/campaign/${campaign._id}`, { actions: campaign.actions });
 };
 

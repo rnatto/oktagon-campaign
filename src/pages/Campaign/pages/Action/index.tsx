@@ -1,19 +1,15 @@
 import { Box, Typography, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { campaignService } from '../../../../services';
 import { Action as ActionInterface } from '../../../../utils/interfaces/action';
 import { Campaign } from '../../../../utils/interfaces/campaign';
 import * as yup from 'yup';
+import { act } from 'react-dom/test-utils';
 
 const Action: React.FC = () => {
-  const initialValues = {
-    title: '',
-    description: '',
-    dateBegin: '',
-    dateEnd: '',
-  };
+  const [editAction, setEditAction] = useState({} as ActionInterface);
   const validationSchema = yup.object().shape({
     title: yup
       .string()
@@ -30,10 +26,16 @@ const Action: React.FC = () => {
   });
   const history = useHistory();
   let { id } = useParams<{ id: string }>();
+  let location = useLocation<{ action: ActionInterface }>();
+  const initialValues = location?.state?.action || { title: '', dateEnd: '', description: '', dateBegin: '' }
   useEffect(() => {
     getCampaign();
-
   }, []);
+
+  useEffect(() => {
+    setEditAction(location?.state?.action);
+  }, [location]);
+
   const getCampaign = useCallback(async () => {
     try {
       const { data } = await campaignService.getById(id);
@@ -56,8 +58,16 @@ const Action: React.FC = () => {
         onSubmit={async (values: ActionInterface, { setSubmitting }) => {
           setSubmitting(true);
           try {
-            const actions =
-              await campaignService.update({ ...campaign, actions: [...campaign.actions, values] });
+            let actions: ActionInterface[];
+            if (editAction) {
+              const index = campaign.actions.findIndex(action => action._id === editAction._id);
+              actions = [...campaign.actions];
+              actions[index] = values;
+            } else {
+              actions = [...campaign.actions, values];
+            }
+            console.log(actions);
+            await campaignService.update({ ...campaign, actions });
             history.goBack();
           } catch (error) {
             console.log(error);
@@ -106,7 +116,7 @@ const Action: React.FC = () => {
             </Box>
             <Box px={1} py={2}>
               <Typography variant="body1">
-                When will the campaign start and end? This can be updated later.
+                When will the action start and end?
               </Typography>
               <Box display="flex" flexWrap="wrap">
                 <Box m={1}>

@@ -105,7 +105,7 @@ const FormCampaign: React.FC = () => {
               </Box>
               <Box px={1} py={2}>
                 <Typography variant="body1">
-                  When will the campaign start and end? This can be updated later.
+                  When will the campaign start and end?
                 </Typography>
                 <Box display="flex" flexWrap="wrap">
                   <Box m={1}>
