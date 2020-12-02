@@ -3,8 +3,11 @@
 ## Sugestão de melhorias
 
 Começando no header da aplicação, precisamos alterar o título e logo para que a aplicação atenda um mercado de campanha genérico.
-Para atender uma alta demanda de criação de tickets, precisamos adicionar paginação na listagem das campanhas. Já possuímos os filtros que já tornam a listagem eficáz nas buscas, mas precisamos adicionar a ordenação dos elementos com base nas datas.
-Podemos verificar com o cliente da necessidade de filtrar as campanhas por períodos de data para facilitar buscas futuras. Mas o comportamento atual me parece atender a demanda
+Para atender uma alta demanda de criação de tickets, precisamos adicionar paginação na listagem das campanhas. 
+
+Já possuímos os filtros que já tornam a listagem eficaz nas buscas, mas precisamos adicionar a ordenação dos elementos com base nas datas.
+
+Podemos verificar com o cliente da necessidade de filtrar as campanhas por períodos de data para facilitar buscas futuras. Mas o comportamento atual me parece atender a demanda.
 Com estas pequenas alterações já teremos uma listagem de campanhas mais consistente e dinâmica. 
 
 ## Integridade
@@ -15,7 +18,7 @@ Os testes também devem ser implementados na criação de novas campanhas e nova
 
 ## Design
 
-Para atender o design enviado, temos algumas pequenas alterações que podem ser organizadas seguindo a prioridade abaixo:
+Para atender o design enviado, temos algumas pequenas alterações:
 
 - Geral
     - Corrigir paleta de cores
